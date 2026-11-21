@@ -77,9 +77,10 @@ teatro-garibaldi/
 ```bash
 # 1. ambiente virtuale e dipendenze
 python -m venv .venv
-source .venv/bin/activate # per Windows: .venv\Scripts\activate
+source .venv/bin/activate 
 cd project-work-main
 pip install -r requirements.txt
+  # per Windows usare: .venv\Scripts\activate
 
 # 2. creazione del database con dati dimostrativi
 python -m backend.seed # rifiuta di sovrascrivere un database esistente
@@ -127,7 +128,7 @@ Account dimostrativi:
 
 | Ruolo | Email | Password |
 |-------------|------------------------------------|------------------|
-| Spettatore | margherita.hack@example.com | Spettatore2026! |
+| Spettatore | anna.rinaldi@example.com | Spettatore2026! |
 | Operatore | biglietteria@teatrogaribaldi.it | Operatore2026! |
 | Admin | admin@teatrogaribaldi.it | Admin2026! |
 
@@ -179,7 +180,7 @@ python -m pytest -v
 | GET | `/api/utenti` | admin | Elenco utenti |
 | PATCH | `/api/utenti/{id}` | admin | Modifica il ruolo |
 | GET | `/api/audit?categoria=&esito=&email=&da=&limite=` | admin | Registro di audit |
-| GET | `/api/avvisi?stato=aperti\|tutte` | admin | Avvisi di sicurezza |
+| GET | `/api/avvisi?stato=aperti\|tutti` | admin | Avvisi di sicurezza |
 | PATCH | `/api/avvisi/{id}` | admin | Segna un avviso come gestito con nota obbligatoria |
 
 Esempio di prenotazione:
@@ -255,9 +256,10 @@ L'analisi di applicabilità della NIS2 al teatro, la corrispondenza con le misur
 - Minimizzazione: le esportazioni CSV per la direzione non contengono dati personali.
 
 ## Note sul prototipo
-
 I dati sono simulati: il Teatro Garibaldi è trattato come caso di studio e utenti, spettacoli e date della stagione sono ipotetici.
 
 Le email non vengono spedite: i messaggi (conferme, annullamenti, promemoria, avvisi della lista d'attesa) sono salvati nella tabella `notifiche` e mostrati nell'area personale. Per l'invio reale è necessario sostituire la funzione `invia` in `backend/notifiche.py` con una spedizione SMTP.
 
 La lettura del QR code da fotocamera usa l'API nativa `BarcodeDetector` (Chrome, Edge, Android); sugli altri browser resta disponibile l'inserimento manuale del codice.
+
+
