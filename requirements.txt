@@ -1,0 +1,5 @@
+flask>=3.0
+werkzeug>=3.0
+segno>=1.6        # generazione dei QR code dei biglietti
+tzdata>=2024.1    # fuso orario Europe/Rome anche su Windows
+pytest>=8.0

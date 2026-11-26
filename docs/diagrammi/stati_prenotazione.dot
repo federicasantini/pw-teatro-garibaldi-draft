@@ -1,0 +1,8 @@
+
+digraph S {
+  rankdir=LR; node [fontname="DejaVu Sans", fontsize=10, shape=box, style="rounded,filled", fillcolor="#f7f2e9", color="#6e1423"]; edge [fontname="DejaVu Sans", fontsize=9];
+  start [shape=circle, label="", width=0.2, fillcolor="#241a17"];
+  start -> confermata [label="POST /prenotazioni\n(posti disponibili, max 6 per utente)"];
+  confermata -> utilizzata [label="check-in operatore\n(da 2 h prima a fine spettacolo)"];
+  confermata -> annullata [label="annullamento utente (≥24h), biglietteria,\nreplica annullata o account eliminato"];
+}

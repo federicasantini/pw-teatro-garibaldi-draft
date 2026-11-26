@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>I miei biglietti · Teatro Garibaldi</title>
+  <link rel="stylesheet" href="vendor/bootstrap-italia/css/bootstrap-italia.min.css">
+  <link rel="stylesheet" href="vendor/design-tokens-italia/variables.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="principale" class="container my-5">
+    <nav aria-label="Percorso di navigazione" class="breadcrumb-container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Cartellone</a><span class="separator">/</span></li>
+        <li class="breadcrumb-item active" aria-current="page">I miei biglietti</li>
+      </ol>
+    </nav>
+    <h1>I miei biglietti</h1>
+    <p class="lead">All'ingresso mostra il QR code (o il codice): la biglietteria lo convalida al momento dell'accesso in sala.</p>
+    <div id="messaggi"></div>
+
+    <div class="row g-3 g-lg-5">
+      <div class="col-lg-8">
+        <h2 class="h4 mt-4">In programma</h2>
+        <div id="future"></div>
+        <section id="sezione-attesa" hidden>
+          <h2 class="h4 mt-5">Liste d'attesa</h2>
+          <div id="attesa"></div>
+        </section>
+        <h2 class="h4 mt-5">Storico</h2>
+        <div id="passate"></div>
+      </div>
+
+      <div class="col-lg-4">
+        <h2 class="h4 mt-4">Messaggi</h2>
+        <div class="accordion" id="notifiche"></div>
+
+        <div class="callout mt-5">
+          <div class="callout-title"><svg class="icon" aria-hidden="true"><use href="vendor/bootstrap-italia/svg/sprites.svg#it-locked"></use></svg>I tuoi dati</div>
+          <p>Puoi scaricare una copia dei dati che ti riguardano (GDPR, artt. 15 e 20) o eliminare il tuo account (art. 17).
+            <a href="privacy.html">Leggi l'informativa</a>.</p>
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-outline-primary btn-sm btn-icon justify-content-center" id="scarica-dati">
+              <svg class="icon icon-sm icon-primary" aria-hidden="true"><use href="vendor/bootstrap-italia/svg/sprites.svg#it-download"></use></svg><span>Scarica i miei dati (JSON)</span></button>
+            <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modale-elimina">Elimina il mio account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modale-elimina" aria-labelledby="titolo-elimina">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <form class="modal-content" id="form-elimina">
+          <div class="modal-header"><h2 class="modal-title h5" id="titolo-elimina">Eliminare l'account?</h2></div>
+          <div class="modal-body">
+            <p>L'operazione è <strong>irreversibile</strong>: le prenotazioni future vengono annullate, i dati identificativi
+              cancellati e lo storico resta solo in forma anonima.</p>
+            <div class="form-group mt-4 mb-0">
+              <label for="pw-elimina">Conferma con la tua password</label>
+              <input id="pw-elimina" type="password" class="form-control" autocomplete="current-password" required>
+            </div>
+            <div id="esito-elimina"></div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-primary btn-sm" type="button" data-bs-dismiss="modal">Annulla</button>
+            <button class="btn btn-danger btn-sm" type="submit">Elimina definitivamente</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="vendor/bootstrap-italia/js/bootstrap-italia.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pagine/area-personale.js"></script>
+</body>
+</html>

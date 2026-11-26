@@ -1,0 +1,17 @@
+
+digraph UC {
+  rankdir=LR; fontname="DejaVu Sans"; node [fontname="DejaVu Sans", fontsize=10]; edge [color="#241a17", arrowhead=none];
+  node [shape=box, style="filled", fillcolor="#efe2c4", color="#b8862b"];
+  V [label="Visitatore"]; S [label="Spettatore"]; O [label="Operatore\nbiglietteria"]; A [label="Amministratore"];
+  edge [arrowhead=empty, style=dashed]; S -> V; O -> S; A -> O;
+  edge [arrowhead=none, style=solid];
+  subgraph cluster_sys { label="Piattaforma Teatro Garibaldi"; style=rounded; color="#6e1423";
+    node [shape=ellipse, style=filled, fillcolor="#f7f2e9", color="#6e1423"];
+    uc1 [label="Consultare il cartellone"]; uc2 [label="Verificare la disponibilità"]; uc3 [label="Registrarsi / Accedere"];
+    uc4 [label="Prenotare posti"]; uc5 [label="Annullare prenotazione"]; uc6 [label="Lasciare un feedback"];
+    uc7 [label="Convalidare ingresso\n(check-in)"]; uc8 [label="Gestire spettacoli\ne repliche"]; uc9 [label="Consultare dashboard KPI"];
+    uc10 [label="Gestire utenti e ruoli"]; uc11 [label="Iscriversi alla\nlista d'attesa"];
+    uc12 [label="Esportare o cancellare\ni propri dati (GDPR)"]; uc13 [label="Esportare i dati\nin CSV"]; }
+  V -> uc1; V -> uc2; V -> uc3; S -> uc4; S -> uc5; S -> uc6; S -> uc11; S -> uc12;
+  O -> uc7; O -> uc8; O -> uc9; O -> uc13; A -> uc10;
+}

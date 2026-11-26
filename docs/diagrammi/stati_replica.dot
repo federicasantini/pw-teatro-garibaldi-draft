@@ -1,0 +1,10 @@
+
+digraph R {
+  rankdir=LR; node [fontname="DejaVu Sans", fontsize=10, shape=box, style="rounded,filled", fillcolor="#f7f2e9", color="#6e1423"]; edge [fontname="DejaVu Sans", fontsize=9];
+  start [shape=circle, label="", width=0.2, fillcolor="#241a17"];
+  fine [shape=doublecircle, label="", width=0.15, fillcolor="#241a17"];
+  start -> programmata [label="POST /repliche\n(sala libera: durata + 60 min)"];
+  programmata -> conclusa [label="PATCH dopo l'inizio\no manutenzione a fine spettacolo"];
+  programmata -> annullata [label="PATCH stato=annullata\n(annulla prenotazioni e avvisa)"];
+  conclusa -> fine; annullata -> fine;
+}

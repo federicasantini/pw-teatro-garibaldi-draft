@@ -1,0 +1,167 @@
+/* =====================================================================
+   Teatro Garibaldi - personalizzazioni sopra Bootstrap Italia.
+
+   Tutti i valori di design (colori, tipografia, spaziature, bordi, raggi,
+   dimensioni delle icone) usano ESCLUSIVAMENTE le variabili dei Design Tokens
+   Italia 1.3.3 (vendor/design-tokens-italia/variables.css, caricato prima di
+   questo file). Restano numeri solo dove non esiste un token:
+   - misure di layout dei componenti (QR code, altezza del grafico, larghezze
+     minime di colonne e menu, rapporti d'aspetto);
+   - valori strutturali come 0, 100%, auto, z-index.
+
+   Contrasti (WCAG 2.1 AA): testo ≥ 4,5:1; contorni dei controlli e indicatori
+   grafici ≥ 3:1 (criterio 1.4.11). I separatori puramente decorativi usano
+   --it-color-border-subtle.
+   ===================================================================== */
+
+[hidden] { display: none !important; }
+
+/* Le aree scorrevoli (tabelle, barra delle schede) devono contenere anche gli elementi
+   "visually-hidden" posizionati in modo assoluto, altrimenti a 320px di larghezza la
+   pagina scorre in orizzontale (WCAG 1.4.10, Reflow). */
+.table-responsive, .nav-tabs { position: relative; }
+
+/* ------------------------------------------------------------- header */
+.logo-teatro { width: var(--it-icon-size-xl); height: var(--it-icon-size-xl); color: var(--it-color-text-inverse); }
+.it-footer .logo-teatro,
+.it-header-center-wrapper .logo-teatro { flex: none; }
+.it-footer .logo-teatro { width: var(--it-icon-size-l); height: var(--it-icon-size-l); }
+@media (max-width: 991.98px) { .logo-teatro { width: var(--it-icon-size-l); height: var(--it-icon-size-l); } }
+.it-header-slim-wrapper .dropdown-menu { min-width: 220px; }
+.it-header-slim-wrapper .dropdown-item.btn-link { width: 100%; text-align: left; border: 0; background: none; }
+
+/* ---------------------------------------------------------------- hero */
+.sipario { background: linear-gradient(135deg, var(--it-color-background-primary-muted), var(--it-color-background-primary)); }
+.sipario-stagione {
+  color: var(--it-color-text-inverse); text-transform: uppercase;
+  font-weight: var(--it-font-weight-semibold); font-size: var(--it-caption-font-size);
+  margin-bottom: var(--it-spacing-xxs);
+}
+
+/* ------------------------------------------------------------- filtri */
+.filtri-genere { display: flex; flex-wrap: wrap; gap: var(--it-spacing-xxs); justify-content: flex-end; }
+@media (max-width: 991.98px) { .filtri-genere { justify-content: flex-start; } }
+
+/* ------------------------------------------------- card del cartellone */
+.scheda-spettacolo { overflow: hidden; height: var(--it-sizing-full); }
+.scheda-spettacolo .card-body { padding-bottom: var(--it-spacing-m); }
+.locandina {
+  aspect-ratio: 16 / 6; display: grid; place-items: center; color: var(--it-color-text-inverse);
+  font-family: var(--it-font-serif), Georgia, serif; font-size: var(--it-font-size-4); text-transform: uppercase;
+}
+/* Una famiglia di colore dei token per genere: il testo bianco supera 4,5:1 su tutto il gradiente */
+.locandina.prosa   { background: linear-gradient(135deg, var(--it-color-blue-20), var(--it-color-blue-40)); }
+.locandina.lirica  { background: linear-gradient(135deg, var(--it-color-slate-20), var(--it-color-slate-44)); }
+.locandina.danza   { background: linear-gradient(135deg, var(--it-color-teal-20), var(--it-color-teal-26)); }
+.locandina.musica  { background: linear-gradient(135deg, var(--it-color-seagreen-14), var(--it-color-seagreen-24)); }
+.locandina.ragazzi { background: linear-gradient(135deg, var(--it-color-orange-20), var(--it-color-orange-30)); }
+.stelle { display: inline-flex; vertical-align: middle; }
+
+/* ------------------------------------------------- pagina spettacolo */
+.pannello-prenota { position: sticky; top: var(--it-spacing-s); border-top: var(--it-border-thick) solid var(--it-color-border-primary); }
+.elenco-repliche { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--it-spacing-xxs); }
+
+/* Riquadri cliccabili (date e settori): contorno --it-color-border-secondary, 5,2:1 sul bianco */
+.elenco-repliche .replica {
+  width: var(--it-sizing-full); text-align: left; display: flex; justify-content: space-between; align-items: center;
+  gap: var(--it-spacing-xs); padding: var(--it-spacing-xs) var(--it-spacing-s);
+  border: var(--it-border-base) solid var(--it-color-border-secondary); border-radius: var(--it-radius-smooth);
+  background: var(--it-color-background-inverse); color: var(--it-color-text-base);
+}
+.elenco-repliche .replica:hover:not(:disabled) { border-color: var(--it-color-border-primary-hover); }
+.elenco-repliche .replica[aria-pressed="true"] {
+  border-color: var(--it-color-border-primary); box-shadow: inset 0 0 0 var(--it-border-base) var(--it-color-border-primary);
+  background: var(--it-color-background-primary-lighter);
+}
+.elenco-repliche .replica:disabled {
+  cursor: not-allowed; color: var(--it-color-text-disabled);
+  background: var(--it-color-background-muted); border-color: var(--it-color-border-disabled);
+}
+.nota-replica { font-size: var(--it-caption-font-size); text-align: right; }
+.attesa {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--it-spacing-xxs);
+  padding: var(--it-spacing-xxs) var(--it-spacing-3xs) 0; font-size: var(--it-label-font-size-s);
+}
+.attesa label { margin: 0; color: var(--it-color-text-muted); position: static; transform: none; font-size: var(--it-label-font-size-s); }
+.attesa select { width: auto; height: var(--it-spacing-10x); padding: 0 var(--it-spacing-l) 0 var(--it-spacing-xxs); }
+
+.settore {
+  border: var(--it-border-base) solid var(--it-color-border-secondary); border-radius: var(--it-radius-smooth);
+  padding: var(--it-spacing-xs) var(--it-spacing-s) var(--it-spacing-xxs); margin: 0 0 var(--it-spacing-xxs);
+}
+.settore:has(input:checked) {
+  border-color: var(--it-color-border-primary); box-shadow: inset 0 0 0 var(--it-border-base) var(--it-color-border-primary);
+  background: var(--it-color-background-primary-lighter);
+}
+.settore:has(input:disabled) { border-color: var(--it-color-border-disabled); }
+.settore .settore-etichetta { display: flex !important; justify-content: space-between; align-items: center; gap: var(--it-spacing-xs); width: var(--it-sizing-full); margin: 0; }
+.settore .settore-etichetta > span:first-child { flex: 1; }
+.settore .progress { height: var(--it-spacing-2x); margin-top: var(--it-spacing-3xs); }
+.card-body > .rating { align-self: flex-start; }  /* nel flex della card il float del kit allineerebbe le stelle a destra */
+.totale {
+  display: flex; justify-content: space-between; font-size: var(--it-font-size-5); font-weight: var(--it-font-weight-bold);
+  padding: var(--it-spacing-xs) 0; border-top: var(--it-border-base) dashed var(--it-color-border-subtle);
+}
+.codice-esito { font-family: var(--it-font-mono), monospace; font-size: var(--it-font-size-5); }
+.recensione { border-top: var(--it-border-base) solid var(--it-color-border-subtle); padding: var(--it-spacing-s) 0; }
+.recensione:first-child { border-top: 0; }
+
+/* ---------------------------------------------------------- biglietti */
+/* Barra laterale di stato (indicatore grafico, ≥ 3:1): lo stato è ripetuto anche nel badge testuale */
+.biglietto { border-left: var(--it-border-thick) solid var(--it-color-border-primary); }
+.biglietto.utilizzata { border-left-color: var(--it-color-border-secondary); }
+.biglietto.annullata { border-left-color: var(--it-color-slate-52); background: var(--it-color-background-muted); }
+.biglietto .codice {
+  font-family: var(--it-font-mono), monospace; font-size: var(--it-font-size-5);
+  font-weight: var(--it-font-weight-bold); color: var(--it-color-text-primary);
+}
+.biglietto .azioni { display: flex; flex-direction: column; gap: var(--it-spacing-xxs); align-items: flex-end; }
+.biglietto .qr {
+  width: 132px; height: 132px; background: var(--it-color-white);
+  border: var(--it-border-base) solid var(--it-color-border-subtle); border-radius: var(--it-radius-smooth);
+}
+@media (max-width: 575.98px) { .biglietto .azioni { align-items: flex-start; } }
+
+/* ------------------------------------------------------- area gestione */
+.kpi .card { height: var(--it-sizing-full); }
+.kpi .valore {
+  display: block; font-size: var(--it-font-size-8); font-weight: var(--it-font-weight-bold);
+  color: var(--it-color-text-primary); line-height: var(--it-heading-leading); white-space: nowrap;
+}
+.kpi .kpi-titolo { text-transform: uppercase; font-size: var(--it-label-font-size-xs); font-weight: var(--it-font-weight-semibold); color: var(--it-color-text-muted); }
+.kpi .nota { display: block; font-size: var(--it-font-size-1); color: var(--it-color-text-muted); margin-top: var(--it-spacing-3xs); }
+.grafico-barre { display: grid; gap: var(--it-spacing-xxs); }
+.grafico-barre .riga {
+  display: grid; grid-template-columns: minmax(90px, 170px) 1fr auto; gap: var(--it-spacing-xs);
+  align-items: center; font-size: var(--it-caption-font-size);
+}
+.grafico-barre .nome-barra { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.grafico-barre .progress { height: var(--it-spacing-3x); }
+.grafico-barre .valore { font-variant-numeric: tabular-nums; min-width: 72px; text-align: right; }
+/* Istogramma: barre in colore primario (5,6:1) e asse orizzontale ≥ 3:1 */
+.colonne {
+  display: flex; align-items: flex-end; gap: var(--it-spacing-3xs); height: 160px;
+  border-bottom: var(--it-border-base) solid var(--it-color-border-secondary); padding-top: var(--it-spacing-xxs);
+}
+.colonne span { flex: 1; background: var(--it-color-background-primary); border-radius: var(--it-radius-smooth) var(--it-radius-smooth) 0 0; min-height: var(--it-border-double); }
+.assi { display: flex; justify-content: space-between; font-size: var(--it-font-size-1); }
+.input-codice { font-family: var(--it-font-mono), monospace; font-size: var(--it-font-size-5); text-transform: uppercase; }
+.scanner video {
+  width: var(--it-sizing-full); max-width: 420px; border-radius: var(--it-radius-smooth);
+  background: var(--it-color-black-100); aspect-ratio: 4 / 3; object-fit: cover;
+}
+.listino {
+  border: var(--it-border-base) dashed var(--it-color-border-subtle); border-radius: var(--it-radius-smooth);
+  padding: var(--it-spacing-s) var(--it-spacing-s) 0; margin-bottom: var(--it-spacing-m);
+}
+.listino legend {
+  float: none; width: auto; font-size: var(--it-body-font-size); font-weight: var(--it-font-weight-semibold);
+  padding: 0 var(--it-spacing-3xs); margin: 0;
+}
+.tabella-azioni { white-space: nowrap; }
+
+/* ------------------------------------------------------- notifica (toast) */
+.notification.bottom-fix { z-index: 1060; }
+
+/* ---------------------------------------------------------- sicurezza */
+.dettagli-audit { font-family: var(--it-font-mono), monospace; font-size: var(--it-font-size-1); max-width: 320px; word-break: break-word; }

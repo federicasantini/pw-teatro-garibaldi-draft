@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dichiarazione di accessibilità · Teatro Garibaldi</title>
+  <link rel="stylesheet" href="vendor/bootstrap-italia/css/bootstrap-italia.min.css">
+  <link rel="stylesheet" href="vendor/design-tokens-italia/variables.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="principale" class="container my-5">
+    <div class="row"><div class="col-lg-8">
+      <nav aria-label="Percorso di navigazione" class="breadcrumb-container">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Cartellone</a><span class="separator">/</span></li>
+          <li class="breadcrumb-item active" aria-current="page">Dichiarazione di accessibilità</li>
+        </ol>
+      </nav>
+      <h1>Dichiarazione di accessibilità</h1>
+
+      <div class="callout warning">
+        <div class="callout-title"><svg class="icon" aria-hidden="true"><use href="vendor/bootstrap-italia/svg/sprites.svg#it-warning-circle"></use></svg>Bozza</div>
+        <p>Questa è una bozza redatta per il project work secondo il modello di dichiarazione di accessibilità per le
+          pubbliche amministrazioni (Allegato 1 alle Linee guida AgID sull'accessibilità degli strumenti informatici).
+          La dichiarazione definitiva va compilata dal Responsabile per la transizione al digitale del Comune e pubblicata
+          tramite l'applicazione form.agid.gov.it. Le parti tra parentesi quadre vanno completate dal Comune.</p>
+      </div>
+
+      <h2 class="h4 mt-5">Sezione 1 – Dichiarazione</h2>
+      <p class="lead">Il <strong>Comune di Mazara del Vallo</strong>, che gestisce il Teatro Garibaldi, si impegna a rendere
+        accessibile la piattaforma digitale del teatro, conformemente alla legge 9 gennaio 2004, n. 4, come modificata dal
+        decreto legislativo 10 agosto 2018, n. 106, che ha recepito la direttiva (UE) 2016/2102.</p>
+      <p>La presente dichiarazione si applica al sito <strong>[indirizzo del sito]</strong>: cartellone, prenotazione dei
+        biglietti, area personale e area di gestione per il personale comunale addetto al teatro.</p>
+
+      <h3 class="h5 mt-4">Stato di conformità</h3>
+      <p>Il sito è <strong>parzialmente conforme</strong> ai requisiti previsti dall'allegato A alla norma UNI CEI EN
+        301549, che rimanda alle Linee guida per l'accessibilità dei contenuti web (WCAG) 2.1, livello AA, a causa dei casi
+        di non conformità elencati di seguito.</p>
+
+      <h3 class="h5 mt-4">Contenuti non accessibili</h3>
+      <h4 class="h6">a) Inosservanza della legge 4/2004</h4>
+      <ul>
+        <li><strong>Grafico "Prenotazioni giornaliere" nell'area di gestione</strong> (criteri 1.1.1 e 1.3.1). I valori di
+          ciascun giorno sono disponibili solo passando il puntatore sulle colonne: non sono raggiungibili da tastiera né
+          leggibili con un lettore di schermo. Gli altri grafici della dashboard riportano i valori anche come testo.
+          <em>Intervento previsto:</em> affiancare al grafico una tabella con i dati. [Data prevista]</li>
+        <li><strong>Durata della sessione</strong> (criterio 2.2.1). Dopo 8 ore dall'accesso la sessione scade senza
+          preavviso e senza possibilità di prolungarla; eventuali dati inseriti in un modulo non ancora inviato vanno
+          reinseriti dopo un nuovo accesso. <em>Intervento previsto:</em> avviso prima della scadenza con possibilità di
+          prolungare la sessione. [Data prevista]</li>
+      </ul>
+      <h4 class="h6">b) Onere sproporzionato</h4>
+      <p>Nessun contenuto.</p>
+      <h4 class="h6">c) Contenuti non soggetti alla legislazione applicabile</h4>
+      <p>[Da valutare a cura del Comune.] Le esportazioni in formato CSV e JSON sono file di dati strutturati e non
+        presentano problemi di accessibilità noti.</p>
+
+      <h3 class="h5 mt-4">Redazione della dichiarazione di accessibilità</h3>
+      <p>La dichiarazione è stata redatta il <strong>19 novembre 2026</strong> sulla base di un'<strong>autovalutazione</strong>
+        effettuata dal gruppo di progetto, che ha compreso:</p>
+      <ul>
+        <li>verifiche automatiche con <strong>axe-core 4.10.2</strong> (regole WCAG 2.0 e 2.1, livelli A e AA) su
+          12 pagine e stati dell'interfaccia: cartellone, accesso, informativa privacy, prenotazione, recensioni, area
+          personale e le sei schede dell'area di gestione. Nessuna violazione rilevata;</li>
+        <li>verifica del ridimensionamento a 320 pixel di larghezza (criterio 1.4.10) su tutte le pagine;</li>
+        <li>verifica della navigazione da tastiera e della visibilità del focus, con il completamento di una prenotazione
+          senza mouse;</li>
+        <li>calcolo dei rapporti di contrasto dei colori, tutti tratti dai Design Tokens Italia: testo ≥ 4,5:1, contorni
+          dei controlli e indicatori grafici ≥ 3:1.</li>
+      </ul>
+      <p>Non sono ancora state effettuate prove con lettori di schermo (ad esempio NVDA o VoiceOver) né con utenti con
+        disabilità. [Da completare prima della pubblicazione.] La dichiarazione va riesaminata almeno una volta l'anno;
+        ultimo riesame: [data].</p>
+
+      <h3 class="h5 mt-4">Meccanismo di feedback e recapiti</h3>
+      <p>Per segnalare casi di mancata conformità, o per richiedere informazioni e contenuti esclusi dall'ambito della
+        dichiarazione, è possibile scrivere al <strong>Responsabile per la transizione al digitale del Comune di Mazara del
+        Vallo</strong> all'indirizzo <strong>[email o PEC del Comune]</strong>, oppure rivolgersi alla biglietteria del
+        teatro, dal martedì al sabato, 10:00–13:00 e 16:00–19:00. Il Comune risponde entro 30 giorni.</p>
+
+      <h3 class="h5 mt-4">Procedura di attuazione</h3>
+      <p>In caso di risposta insoddisfacente o di mancata risposta, nel termine di trenta giorni, alla notifica o alla
+        richiesta, è possibile inoltrare una segnalazione al <strong>Difensore civico per il digitale</strong> istituito
+        presso l'Agenzia per l'Italia digitale (art. 17, comma 1-quater, del Codice dell'amministrazione digitale).
+        [Inserire il collegamento alla pagina del Difensore civico per il digitale.]</p>
+
+      <h2 class="h4 mt-5">Sezione 2 – Informazioni richieste da AgID</h2>
+      <h3 class="h5 mt-4">Informazioni sul sito</h3>
+      <ul>
+        <li>Data di pubblicazione: [data]</li>
+        <li>Test di usabilità: non ancora effettuati</li>
+        <li>CMS: nessuno; applicazione sviluppata appositamente (Python, Flask, SQLite), con interfaccia realizzata con il
+          design system .italia di Designers Italia (Bootstrap Italia 2.18.3 e Design Tokens Italia 1.3.3)</li>
+        <li>Applicazione mobile: non presente; il sito è utilizzabile da smartphone</li>
+      </ul>
+      <h3 class="h5 mt-4">Informazioni sulla struttura</h3>
+      <ul>
+        <li>Numero di dipendenti con disabilità presenti nell'amministrazione: [dato del Comune]</li>
+        <li>Numero di postazioni di lavoro per dipendenti con disabilità: [dato del Comune]</li>
+        <li>Percentuale della spesa prevista nel bilancio di previsione destinata all'accessibilità: [dato del Comune]</li>
+        <li>Responsabile dei processi di integrazione (art. 39-ter del d.lgs. 165/2001): figura prevista [sì/no];
+          nominata [sì/no]</li>
+      </ul>
+    </div></div>
+  </main>
+
+  <script src="vendor/bootstrap-italia/js/bootstrap-italia.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>

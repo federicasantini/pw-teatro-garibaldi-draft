@@ -1,0 +1,27 @@
+[project]
+name = "teatro-garibaldi"
+version = "1.1.0"
+description = "La trasformazione digitale del Teatro Garibaldi di Mazara del Vallo: progettazione e sviluppo di un'applicazione web per la gestione dei servizi e il coinvolgimento della comunità"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 130
+target-version = "py310"
+extend-exclude = ["docs/diagrammi"]
+
+[tool.ruff.lint]
+# E/W stile, F errori logici, I ordine import, B bug comuni, UP sintassi moderna, S sicurezza (bandit)
+select = ["E", "W", "F", "I", "B", "UP", "S"]
+ignore = [
+  "S101",  # assert nei test
+  "S608",  # SQL composto solo con nomi di colonna da elenchi fissi; i valori sono sempre parametri
+  "S311",  # random nel seed per dati dimostrativi (i codici reali usano il modulo secrets)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"test/*" = ["S105", "S106", "E501"]  # nei test una riga per scenario
+"backend/seed.py" = ["S105", "S106"]

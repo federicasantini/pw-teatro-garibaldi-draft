@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accedi · Teatro Garibaldi</title>
+  <link rel="stylesheet" href="vendor/bootstrap-italia/css/bootstrap-italia.min.css">
+  <link rel="stylesheet" href="vendor/design-tokens-italia/variables.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="principale" class="container my-5">
+    <div class="row justify-content-center"><div class="col-lg-6 col-md-8">
+      <nav aria-label="Percorso di navigazione" class="breadcrumb-container">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Cartellone</a><span class="separator">/</span></li>
+          <li class="breadcrumb-item active" aria-current="page">Area personale</li>
+        </ol>
+      </nav>
+      <h1 class="mb-4">Area personale</h1>
+
+      <ul class="nav nav-tabs auto" role="tablist">
+        <li class="nav-item" role="presentation"><button class="nav-link active" type="button" role="tab" id="tab-login" aria-controls="form-login" aria-selected="true" data-scheda="login">Accedi</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" type="button" role="tab" id="tab-registrazione" aria-controls="form-registrazione" aria-selected="false" data-scheda="registrazione">Crea un account</button></li>
+      </ul>
+
+      <div class="card shadow-sm rounded"><div class="card-body p-4">
+        <form id="form-login" role="tabpanel" aria-labelledby="tab-login" novalidate>
+          <div class="form-group">
+            <label for="l-email">Email</label>
+            <input id="l-email" type="email" class="form-control" autocomplete="username" required>
+          </div>
+          <div class="form-group">
+            <label for="l-password">Password</label>
+            <input id="l-password" type="password" data-bs-input class="form-control input-password" autocomplete="current-password" required>
+            <button type="button" class="password-icon btn" role="switch" aria-checked="false">
+              <span class="visually-hidden">Mostra o nascondi la password</span>
+              <svg class="password-icon-visible icon icon-sm" aria-hidden="true"><use href="vendor/bootstrap-italia/svg/sprites.svg#it-password-visible"></use></svg>
+              <svg class="password-icon-invisible icon icon-sm d-none" aria-hidden="true"><use href="vendor/bootstrap-italia/svg/sprites.svg#it-password-invisible"></use></svg>
+            </button>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Accedi</button>
+          <div id="esito-login"></div>
+          <div class="callout note mt-5 mb-0">
+            <div class="callout-title"><svg class="icon" aria-hidden="true"><use href="vendor/bootstrap-italia/svg/sprites.svg#it-info-circle"></use></svg>Account dimostrativi</div>
+            <p class="small mb-0">Spettatore: anna.rinaldi@example.com / Spettatore2026!<br>
+              Operatore: biglietteria@teatrogaribaldi.it / Operatore2026!<br>
+              Amministratore: admin@teatrogaribaldi.it / Admin2026!</p>
+          </div>
+        </form>
+
+        <form id="form-registrazione" role="tabpanel" aria-labelledby="tab-registrazione" hidden novalidate>
+          <div class="row">
+            <div class="form-group col-md-6"><label for="r-nome">Nome</label><input type="text" id="r-nome" class="form-control" autocomplete="given-name" required></div>
+            <div class="form-group col-md-6"><label for="r-cognome">Cognome</label><input type="text" id="r-cognome" class="form-control" autocomplete="family-name" required></div>
+          </div>
+          <div class="form-group"><label for="r-email">Email</label><input id="r-email" type="email" class="form-control" autocomplete="email" required></div>
+          <div class="form-group">
+            <label for="r-password">Password</label>
+            <input id="r-password" type="password" data-bs-input class="form-control input-password" autocomplete="new-password" minlength="8" required aria-describedby="r-password-aiuto">
+            <button type="button" class="password-icon btn" role="switch" aria-checked="false">
+              <span class="visually-hidden">Mostra o nascondi la password</span>
+              <svg class="password-icon-visible icon icon-sm" aria-hidden="true"><use href="vendor/bootstrap-italia/svg/sprites.svg#it-password-visible"></use></svg>
+              <svg class="password-icon-invisible icon icon-sm d-none" aria-hidden="true"><use href="vendor/bootstrap-italia/svg/sprites.svg#it-password-invisible"></use></svg>
+            </button>
+            <small id="r-password-aiuto" class="form-text">Almeno 8 caratteri, con lettere e numeri.</small>
+          </div>
+          <div class="form-check mb-4">
+            <input id="r-privacy" type="checkbox">
+            <label for="r-privacy">Ho letto l'<a href="privacy.html" target="_blank">informativa sulla privacy</a> e acconsento al trattamento dei dati personali (Reg. UE 2016/679).</label>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Registrati</button>
+          <div id="esito-reg"></div>
+        </form>
+      </div></div>
+    </div></div>
+  </main>
+
+  <script src="vendor/bootstrap-italia/js/bootstrap-italia.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pagine/accedi.js"></script>
+</body>
+</html>

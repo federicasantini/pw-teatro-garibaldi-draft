@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cartellone · Teatro Garibaldi</title>
+  <link rel="stylesheet" href="vendor/bootstrap-italia/css/bootstrap-italia.min.css">
+  <link rel="stylesheet" href="vendor/design-tokens-italia/variables.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="principale">
+    <section class="sipario" aria-labelledby="titolo-pagina">
+      <div class="container py-5">
+        <div class="row"><div class="col-lg-8">
+          <p class="sipario-stagione">Stagione 2026/27</p>
+          <h1 id="titolo-pagina" class="text-white">Il cartellone del Teatro Garibaldi</h1>
+          <p class="lead text-white">Prosa, lirica, danza, musica e teatro per ragazzi. Scegli lo spettacolo, la data e il settore:
+            la prenotazione è immediata e il biglietto, con QR code, arriva subito nella tua area personale.</p>
+        </div></div>
+      </div>
+    </section>
+
+    <div class="container my-5">
+      <form id="filtri" role="search" class="row g-4 align-items-center mb-4">
+        <div class="col-lg-5">
+          <div class="form-group mb-0">
+            <div class="input-group">
+              <span class="input-group-text"><svg class="icon icon-sm" aria-hidden="true"><use href="vendor/bootstrap-italia/svg/sprites.svg#it-search"></use></svg></span>
+              <label for="ricerca">Cerca per titolo, autore o compagnia</label>
+              <input type="search" class="form-control" id="ricerca" autocomplete="off">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="filtri-genere" id="generi" role="group" aria-label="Filtra per genere"></div>
+        </div>
+      </form>
+      <div id="messaggi"></div>
+      <h2 class="visually-hidden">Spettacoli</h2>
+      <div class="row" id="cartellone" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <script src="vendor/bootstrap-italia/js/bootstrap-italia.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pagine/cartellone.js"></script>
+</body>
+</html>

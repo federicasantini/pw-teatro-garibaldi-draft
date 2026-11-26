@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestione · Teatro Garibaldi</title>
+  <link rel="stylesheet" href="vendor/bootstrap-italia/css/bootstrap-italia.min.css">
+  <link rel="stylesheet" href="vendor/design-tokens-italia/variables.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <main id="principale" class="container my-5">
+    <nav aria-label="Percorso di navigazione" class="breadcrumb-container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Cartellone</a><span class="separator">/</span></li>
+        <li class="breadcrumb-item active" aria-current="page">Area gestione</li>
+      </ol>
+    </nav>
+    <h1 class="mb-4">Area gestione</h1>
+
+    <ul class="nav nav-tabs auto" role="tablist" id="schede">
+      <li class="nav-item" role="presentation"><button class="nav-link active" type="button" role="tab"
+          aria-selected="true" aria-controls="pannello-dashboard" data-scheda="dashboard">
+          <svg class="icon icon-sm me-1" aria-hidden="true">
+            <use href="vendor/bootstrap-italia/svg/sprites.svg#it-chart-line"></use>
+          </svg>Dashboard</button></li>
+      <li class="nav-item" role="presentation"><button class="nav-link" type="button" role="tab" aria-selected="false"
+          aria-controls="pannello-checkin" data-scheda="checkin">
+          <svg class="icon icon-sm me-1" aria-hidden="true">
+            <use href="vendor/bootstrap-italia/svg/sprites.svg#it-check-circle"></use>
+          </svg>Check-in</button></li>
+      <li class="nav-item" role="presentation"><button class="nav-link" type="button" role="tab" aria-selected="false"
+          aria-controls="pannello-spettacoli" data-scheda="spettacoli">
+          <svg class="icon icon-sm me-1" aria-hidden="true">
+            <use href="vendor/bootstrap-italia/svg/sprites.svg#it-presentation"></use>
+          </svg>Spettacoli</button></li>
+      <li class="nav-item" role="presentation"><button class="nav-link" type="button" role="tab" aria-selected="false"
+          aria-controls="pannello-repliche" data-scheda="repliche">
+          <svg class="icon icon-sm me-1" aria-hidden="true">
+            <use href="vendor/bootstrap-italia/svg/sprites.svg#it-calendar"></use>
+          </svg>Repliche</button></li>
+      <li class="nav-item" role="presentation" id="tab-sicurezza"><button class="nav-link" type="button" role="tab"
+          aria-selected="false" aria-controls="pannello-sicurezza" data-scheda="sicurezza">
+          <svg class="icon icon-sm me-1" aria-hidden="true">
+            <use href="vendor/bootstrap-italia/svg/sprites.svg#it-locked"></use>
+          </svg>Sicurezza <span class="badge bg-danger ms-1" id="conta-avvisi" hidden></span></button></li>
+      <li class="nav-item" role="presentation" id="tab-utenti"><button class="nav-link" type="button" role="tab"
+          aria-selected="false" aria-controls="pannello-utenti" data-scheda="utenti">
+          <svg class="icon icon-sm me-1" aria-hidden="true">
+            <use href="vendor/bootstrap-italia/svg/sprites.svg#it-user"></use>
+          </svg>Utenti</button></li>
+    </ul>
+    <div id="messaggi"></div>
+
+    <!-- DASHBOARD -->
+    <section class="pt-4" id="pannello-dashboard" role="tabpanel" data-pannello="dashboard" aria-label="Dashboard">
+      <div class="d-flex flex-wrap gap-2 justify-content-end align-items-center mb-3" id="barra-csv">
+        <span class="text-secondary small">Esporta in CSV (Excel):</span>
+        <button type="button" class="btn btn-outline-primary btn-xs btn-icon" data-csv="spettacoli">
+          <svg class="icon icon-xs icon-primary" aria-hidden="true">
+            <use href="vendor/bootstrap-italia/svg/sprites.svg#it-file-csv"></use>
+          </svg><span>Riepilogo spettacoli</span></button>
+        <button type="button" class="btn btn-outline-primary btn-xs btn-icon" data-csv="prenotazioni">
+          <svg class="icon icon-xs icon-primary" aria-hidden="true">
+            <use href="vendor/bootstrap-italia/svg/sprites.svg#it-file-csv"></use>
+          </svg><span>Elenco prenotazioni</span></button>
+      </div>
+      <div class="row g-3 kpi mb-4" id="kpi"></div>
+      <div class="row g-3 g-lg-4">
+        <div class="col-lg-6">
+          <div class="card shadow-sm rounded h-100">
+            <div class="card-body">
+              <h2 class="h5">Biglietti per spettacolo</h2>
+              <div class="grafico-barre" id="g-spettacoli"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card shadow-sm rounded h-100">
+            <div class="card-body">
+              <h2 class="h5">Incasso per settore</h2>
+              <div class="grafico-barre" id="g-settori"></div>
+              <h2 class="h5 mt-4">Biglietti per genere</h2>
+              <div class="grafico-barre" id="g-generi"></div>
+              <h2 class="h5 mt-4">Biglietti per tariffa</h2>
+              <div class="grafico-barre" id="g-tariffe"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card shadow-sm rounded">
+            <div class="card-body">
+              <h2 class="h5">Prenotazioni giornaliere (ultimi 30 giorni)</h2>
+              <div class="colonne" id="g-andamento" role="img" aria-label="Andamento giornaliero delle prenotazioni">
+              </div>
+              <div class="text-secondary assi" id="g-andamento-assi"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHECK-IN -->
+    <section class="pt-4" id="pannello-checkin" role="tabpanel" data-pannello="checkin" aria-label="Check-in" hidden>
+      <div class="row">
+        <div class="col-lg-6">
+          <form class="card shadow-sm rounded" id="form-checkin">
+            <div class="card-body p-4">
+              <h2 class="h4">Convalida ingresso</h2>
+              <div class="form-group mt-4">
+                <label for="codice" class="active">Codice prenotazione</label>
+                <input type="text" id="codice" class="form-control input-codice" placeholder="TG-XXXXXX"
+                  autocomplete="off">
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-primary">Convalida</button>
+                <button type="button" class="btn btn-outline-primary btn-icon" id="avvia-scanner" hidden>
+                  <svg class="icon icon-sm icon-primary" aria-hidden="true">
+                    <use href="vendor/bootstrap-italia/svg/sprites.svg#it-camera"></use>
+                  </svg><span>Scansiona QR</span></button>
+              </div>
+              <div class="scanner mt-3" id="scanner" hidden>
+                <video id="video-scanner" playsinline muted></video>
+                <button type="button" class="btn btn-outline-primary btn-xs mt-2" id="ferma-scanner">Chiudi
+                  fotocamera</button>
+              </div>
+              <div id="esito-checkin" aria-live="assertive"></div>
+              <p class="small text-secondary mt-3 mb-0">Il check-in è aperto da 2 ore prima dell'inizio fino al termine
+                dello spettacolo.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPETTACOLI -->
+    <section class="pt-4" id="pannello-spettacoli" role="tabpanel" data-pannello="spettacoli" aria-label="Spettacoli"
+      hidden>
+      <form class="card shadow-sm rounded mb-4" id="form-spettacolo">
+        <div class="card-body p-4">
+          <h2 class="h4" id="titolo-form-sp">Nuovo spettacolo</h2>
+          <input type="hidden" id="sp-id">
+          <div class="row mt-4">
+            <div class="form-group col-md-4"><label for="sp-titolo" class="active">Titolo</label><input type="text"
+                id="sp-titolo" class="form-control" required></div>
+            <div class="form-group col-md-4"><label for="sp-autore" class="active">Autore</label><input type="text"
+                id="sp-autore" class="form-control"></div>
+            <div class="form-group col-md-4"><label for="sp-compagnia" class="active">Compagnia</label><input
+                type="text" id="sp-compagnia" class="form-control"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="select-wrapper mb-4"><label for="sp-genere">Genere</label><select id="sp-genere"></select>
+              </div>
+            </div>
+            <div class="form-group col-md-4"><label for="sp-durata" class="active">Durata (minuti)</label><input
+                id="sp-durata" class="form-control" type="number" min="1" max="600"></div>
+          </div>
+          <div class="form-group"><label for="sp-descrizione" class="active">Descrizione</label><textarea
+              id="sp-descrizione" class="form-control" rows="3"></textarea></div>
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Salva</button>
+            <button type="button" class="btn btn-outline-primary" id="sp-annulla" hidden>Annulla modifica</button>
+          </div>
+          <div id="esito-sp"></div>
+        </div>
+      </form>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <caption class="visually-hidden">Spettacoli in catalogo</caption>
+          <thead>
+            <tr>
+              <th scope="col">Titolo</th>
+              <th scope="col">Genere</th>
+              <th scope="col">Prossima data</th>
+              <th scope="col">Stato</th>
+              <th scope="col"><span class="visually-hidden">Azioni</span></th>
+            </tr>
+          </thead>
+          <tbody id="tab-spettacoli"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- REPLICHE -->
+    <section class="pt-4" id="pannello-repliche" role="tabpanel" data-pannello="repliche" aria-label="Repliche" hidden>
+      <form class="card shadow-sm rounded mb-4" id="form-replica">
+        <div class="card-body p-4">
+          <h2 class="h4">Programma una replica</h2>
+          <div class="row mt-4">
+            <div class="col-md-4">
+              <div class="select-wrapper mb-4"><label for="rp-spettacolo">Spettacolo</label><select id="rp-spettacolo"
+                  required></select></div>
+            </div>
+            <div class="form-group col-md-4"><label for="rp-data" class="active">Data e ora</label><input id="rp-data"
+                class="form-control" type="datetime-local" required></div>
+            <div class="col-md-4">
+              <div class="select-wrapper mb-4"><label for="rp-sala">Sala</label><select id="rp-sala" required></select>
+              </div>
+            </div>
+          </div>
+          <fieldset class="listino">
+            <legend>Listino della replica <span class="text-secondary small fw-normal">(facoltativo: vuoto = prezzo base
+                del settore)</span></legend>
+            <div class="row mt-3" id="rp-prezzi"></div>
+          </fieldset>
+          <button type="submit" class="btn btn-primary">Aggiungi replica</button>
+          <div id="esito-rp"></div>
+        </div>
+      </form>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <caption class="visually-hidden">Calendario delle repliche</caption>
+          <thead>
+            <tr>
+              <th scope="col">Data</th>
+              <th scope="col">Spettacolo</th>
+              <th scope="col" class="text-end">Occupazione</th>
+              <th scope="col">Stato</th>
+              <th scope="col"><span class="visually-hidden">Azioni</span></th>
+            </tr>
+          </thead>
+          <tbody id="tab-repliche"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- UTENTI (solo admin) -->
+    <section class="pt-4" id="pannello-utenti" role="tabpanel" data-pannello="utenti" aria-label="Utenti" hidden>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <caption class="visually-hidden">Utenti registrati e ruoli</caption>
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Email</th>
+              <th scope="col" class="text-end">Prenotazioni</th>
+              <th scope="col">Ruolo</th>
+            </tr>
+          </thead>
+          <tbody id="tab-utenti-body"></tbody>
+        </table>
+      </div>
+    </section>
+    <!-- SICUREZZA (solo admin) -->
+    <section class="pt-4" id="pannello-sicurezza" role="tabpanel" data-pannello="sicurezza" aria-label="Sicurezza"
+      hidden>
+      <h2 class="h4">Avvisi aperti</h2>
+      <p class="text-secondary small">Generate automaticamente dalle regole di rilevamento. Ogni avviso va valutato:
+        un avviso non è di per sé un incidente, ma può esserlo (vedi la procedura in <code>docs/nis2.md</code>).</p>
+      <div id="elenco-avvisi" class="mb-5"></div>
+
+      <h2 class="h4">Registro di audit</h2>
+      <form class="row g-3 align-items-end mb-3" id="filtri-audit">
+        <div class="col-md-3">
+          <div class="select-wrapper"><label for="au-categoria">Categoria</label>
+            <select id="au-categoria">
+              <option value="">Tutte</option>
+              <option value="accesso">Accessi</option>
+              <option value="account">Account e ruoli</option>
+              <option value="catalogo">Catalogo e repliche</option>
+              <option value="prenotazioni">Prenotazioni e check-in</option>
+              <option value="dati">Esportazioni</option>
+              <option value="sistema">Sistema e backup</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="select-wrapper"><label for="au-esito">Esito</label>
+            <select id="au-esito">
+              <option value="">Tutti</option>
+              <option value="ok">ok</option>
+              <option value="fallito">fallito</option>
+              <option value="negato">negato</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group mb-0"><label for="au-email" class="active">Email (anche parziale)</label>
+            <input type="text" id="au-email" class="form-control" autocomplete="off">
+          </div>
+        </div>
+        <div class="col-md-2"><button type="submit" class="btn btn-primary w-100">Filtra</button></div>
+      </form>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle small">
+          <caption class="visually-hidden">Registro di audit</caption>
+          <thead>
+            <tr>
+              <th scope="col">Quando</th>
+              <th scope="col">Azione</th>
+              <th scope="col">Esito</th>
+              <th scope="col">Utente</th>
+              <th scope="col">IP</th>
+              <th scope="col">Dettagli</th>
+            </tr>
+          </thead>
+          <tbody id="tab-audit"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modale-avviso" aria-labelledby="titolo-modale-avviso">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <form class="modal-content" id="form-avviso">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="titolo-modale-avviso">Segna l'avviso come gestito</h2>
+          </div>
+          <div class="modal-body">
+            <p class="small" id="testo-modale-avviso"></p>
+            <input type="hidden" id="avviso-id">
+            <div class="form-group mt-4 mb-0">
+              <label for="avviso-note" class="active">Esito della valutazione (obbligatorio)</label>
+              <textarea id="avviso-note" class="form-control" rows="3" maxlength="1000" required
+                placeholder="es. falso positivo: test interno · oppure: incidente, avviata la procedura"></textarea>
+            </div>
+            <div id="esito-avviso"></div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-primary btn-sm" type="button" data-bs-dismiss="modal">Annulla</button>
+            <button class="btn btn-primary btn-sm" type="submit">Salva</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="vendor/bootstrap-italia/js/bootstrap-italia.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pagine/gestione.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+
+digraph G {
+  rankdir=TB; nodesep=0.6; ranksep=0.55; fontname="DejaVu Sans"; node [fontname="DejaVu Sans", fontsize=11, shape=box, style="rounded,filled", fillcolor="#f7f2e9", color="#6e1423"];
+  edge [fontname="DejaVu Sans", fontsize=9, color="#241a17"];
+  subgraph cluster_client { label="Client (browser)"; style="rounded,dashed"; color="#b8862b";
+    ui [label="Front-end\nHTML5 · JavaScript · Bootstrap Italia 2.18\n(design system Designers Italia)\nindex, spettacolo, accedi,\narea-personale, gestione, privacy"];
+    apijs [label="api.js\nclient REST (fetch)\n+ token di sessione"];
+    ui -> apijs; {rank=same; ui; apijs} }
+  subgraph cluster_server { label="Server applicativo (Python 3 · Flask)"; style="rounded,dashed"; color="#b8862b";
+    router [label="Routing /api/*\nBlueprint"];
+    sic [label="Sicurezza\nauth.py (token hash, RBAC,\nlimite tentativi) · validation.py\nintestazioni CSP"];
+    logica [label="Logica applicativa\nutenti/GDPR · catalogo · prenotazioni (QR)\nlista d'attesa · feedback · dashboard (CSV)"];
+    notif [label="Notifiche\nnotifiche.py\n(posta in uscita simulata)"];
+    audit [label="Sicurezza operativa\naudit.py · rilevamento.py\n(registro, log JSON, avvisi)\nbackup.py"];
+    logica -> audit; audit -> dal;
+    manut [label="Manutenzione periodica\nmanutenzione.py\n(promemoria, chiusura repliche)", style="rounded,filled,dashed"];
+    logica -> notif; manut -> notif; manut -> dal;
+    dal [label="Accesso ai dati\ndb.py (sqlite3)"];
+    router -> sic -> logica -> dal; {rank=same; router; sic} {rank=same; logica; dal} }
+  dbf [label="Base dati relazionale\nSQLite (teatro.db)\n15 tabelle + 1 vista", shape=cylinder, fillcolor="#efe2c4"];
+  apijs -> router [label="HTTP · JSON\nGET/POST/PUT/PATCH/DELETE"];
+  router -> ui [label="file statici", style=dashed];
+  dal -> dbf [label="SQL parametrico\ntransazioni"];
+}
